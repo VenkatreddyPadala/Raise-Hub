@@ -96,7 +96,7 @@ app.post("/foundationRequest", async (req, res) => {
 
   try {
     await newRequest.save();
-    res.redirect("/admin");
+    res.redirect("/");
   } catch (err) {
     res.send(err);
   }
@@ -133,15 +133,15 @@ app.post("/admin/rejectFoundation", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "signin.html"));
+  res.sendFile(path.join(__dirname, "public", "LoginSignin.html"));
 });
 
 app.get("/signin", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "signin.html"));
+  res.sendFile(path.join(__dirname, "public", "LoginSignin.html"));
 });
 
 app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "signup.html"));
+  res.sendFile(path.join(__dirname, "public", "LoginSignin.html"));
 });
 
 app.post("/login", async (req, res) => {
