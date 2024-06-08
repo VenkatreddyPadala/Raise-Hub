@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <a href="/signout"><button>Signout</button></a>
+
+    <h1>Foundations</h1>
+<table border="2">
+    <tr>
+        <th>Foundation Name</th>
+        <th>Cause</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Funds Raised</th>
+        <th>Contact Details</th>
+    </tr>
+    <% foundations.forEach(foundation => { %>
+        <tr>
+            <td><%= foundation.foundationName %></td>
+            <td><%= foundation.cause %></td>
+            <td><%= foundation.description %></td>
+            <td><%= foundation.location %></td>
+            <td><%= foundation.fundsRaised %></td>
+            <td><%= foundation.contactDetails %></td>
+        </tr>
+    <% }) %>
+</table>
+
+<h1>Requests</h1>
+<table border="2">
+    <tr>
+        <th>Foundation Name</th>
+        <th>Cause</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Contact Details</th>
+        <th>Action</th>
+    </tr>
+    <% requests.forEach(request => { %>
+        <tr>
+            <td><%= request.foundationName %></td>
+            <td><%= request.cause %></td>
+            <td><%= request.description %></td>
+            <td><%= request.location %></td>
+            <td><%= request.contactDetails %></td>
+            <td>
+                <form action="/admin/approveFoundation" method="POST"> <!-- Form for approve button -->
+                    <input type="hidden" name="foundationId" value="<%= request._id %>"> <!-- Hidden field to send foundationId -->
+                    <button type="submit">Approve</button>
+                </form>
+                <form action="/admin/rejectFoundation" method="POST"> <!-- Form for reject button -->
+                    <input type="hidden" name="foundationId" value="<%= request._id %>"> <!-- Hidden field to send foundationId -->
+                    <button type="submit">Reject</button>
+                </form>
+            </td>
+        </tr>
+    <% }) %>
+</table>
+
+<h1>Rejected Requests</h1>
+<table border="2">
+    <tr>
+        <th>Foundation Name</th>
+        <th>Cause</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Contact Details</th>
+    </tr>
+    <% rejected.forEach(rejectedRequest => { %>
+        <tr>
+            <td><%= rejectedRequest.foundationName %></td>
+            <td><%= rejectedRequest.cause %></td>
+            <td><%= rejectedRequest.description %></td>
+            <td><%= rejectedRequest.location %></td>
+            <td><%= rejectedRequest.contactDetails %></td>
+        </tr>
+    <% }) %>
+</table>
+
+</body>
+</html>

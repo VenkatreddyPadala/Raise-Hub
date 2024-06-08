@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .left {
+            width: 200px;
+            background-color: #fff;
+            color: #ff1900;
+            padding: 1rem;
+            margin: 1rem;
+            margin-top: 0;
+            border-radius: 1rem;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            cursor: pointer;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #ff1900;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-item:hover,
+        .nav-item.selected {
+            background-color: #dddddd;
+            color: black;
+        }
+
+        .nav-item.selected {
+            border-right: 0.5rem solid #ff1900;
+        }
+
+        .right {
+            flex-grow: 1;
+            padding: 1.5rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            margin: 1rem;
+            margin-top: 0;
+            overflow: hidden;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/signout"><button>Signout</button></a>
+    <hr />
+    <div class="left">
+        <div class="nav-item" data-section="profile">Profile</div>
+        <div class="nav-item selected" data-section="donate">Donate</div>
+        <div class="nav-item" data-section="wallet">Wallet</div>
+        <div class="nav-item" data-section="transactions">Transactions</div>
+    </div>
+    <div class="right">
+        <div id="profile" class="section">
+            <h3>Profile</h3>
+            First name <input type="text" value="<%= user.firstName %>" readonly /><br />
+            Last Name <input type="text" value="<%= user.lastName %>" readonly /><br />
+            Mobile number <input type="number" value="<%= user.number %>" readonly /> <br />
+            Wallet amount <input type="number" value="<%= user.wallet %>" readonly /> <br />
+            No. of transactions <input type="number" value="<%= user.transactions.length %>" readonly /> <br>
+            No. of Deposits <input type="number" value="<%= user.deposits.length %>" readonly />
+        </div>
+        <div id="donate" class="section active">
+            <h1>Donate</h1>
+            <table border="2">
+                <tr>
+                    <th>Foundation Name</th>
+                    <th>Cause</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Funds Raised</th>
+                    <th>Contact Details</th>
+                    <th>Action</th>
+                </tr>
+                <% foundations.forEach(foundation=> { %>
+                    <tr>
+                        <td>
+                            <%= foundation.foundationName %>
+                        </td>
+                        <td>
+                            <%= foundation.cause %>
+                        </td>
+                        <td>
+                            <%= foundation.description %>
+                        </td>
+                        <td>
+                            <%= foundation.location %>
+                        </td>
+                        <td>
+                            <%= foundation.fundsRaised %>
+                        </td>
+                        <td>
+                            <%= foundation.contactDetails %>
+                        </td>
+                        <td>
+                            <form action="/donate" method="POST">
+                                <input type="hidden" name="foundationName" value="<%= foundation.foundationName %>">
+                                <input type="number" name="amount" placeholder="Donation Amount">
+                                <button type="submit">Donate</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+
+            </table>
+        </div>
+        <div id="wallet" class="section">
+            <h1>Wallet</h1>
+            <h4>Remaining Balance: <input type="text" value="<%= user.wallet %>" readonly /></h4>
+            <form action="/addMoney" method="POST">
+                Enter amount <input type="number" name="amount" step="100" required /> <br />
+                <input type="submit" value="Add Money" />
+            </form>
+
+            <h1>Deposits</h1>
+            <table border="2">
+                <tr>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+                <% user.deposits.slice().reverse().forEach(deposit=> { %>
+                    <tr>
+                        <td>
+                            <%= deposit.amount %>
+                        </td>
+                        <td>
+                            <%= deposit.date.toLocaleString() %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+        </div>
+        <div id="transactions" class="section">
+            <h1>Transactions</h1>
+            <table border="2">
+                <tr>
+                    <th>Foundation Name</th>
+                    <th>Cause</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Fund Donated</th>
+                    <th>Date</th>
+                </tr>
+                <% user.transactions.slice().reverse().forEach(transaction=> { %>
+                    <tr>
+                        <td>
+                            <%= transaction.foundationName %>
+                        </td>
+                        <td>
+                            <%= transaction.cause %>
+                        </td>
+                        <td>
+                            <%= transaction.description %>
+                        </td>
+                        <td>
+                            <%= transaction.location %>
+                        </td>
+                        <td>
+                            <%= transaction.amount %>
+                        </td>
+                        <td>
+                            <%= transaction.date.toLocaleString() %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const sectionToShow = this.getAttribute('data-section');
+                    navItems.forEach(nav => nav.classList.remove('selected'));
+                    this.classList.add('selected');
+                    sections.forEach(section => {
+                        section.classList.toggle('active', section.id === sectionToShow);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
