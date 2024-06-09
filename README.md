@@ -2,7 +2,7 @@
 
 You can view the Website here <a href = "https://raise-hub.onrender.com/"> Click Here</a>
 
-Rise Hub is a platform designed to facilitate funding for foundations and charitable causes. Users can sign up, log in, add money to their wallets, and donate to various foundations. Administrators can manage foundation requests, approving or rejecting them as needed.
+Raise Hub is a platform designed to facilitate funding for foundations and charitable causes. Users can sign up, log in, add money to their wallets, and donate to various foundations. Administrators can manage foundation requests, approving or rejecting them as needed.
 
 ## Table of Contents
 
@@ -37,8 +37,8 @@ Rise Hub is a platform designed to facilitate funding for foundations and charit
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/rise-hub.git
-   cd rise-hub
+   git clone https://github.com/yourusername/Raise-hub.git
+   cd Raise-hub
    ```
 
 2. Install the dependencies:
