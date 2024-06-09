@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@700&display=swap" rel="stylesheet">
     <!-- font awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- css stylesheet -->
@@ -181,7 +184,7 @@ button {
     cursor: pointer;
     position: absolute;
     left: 50%;
-    top: 304px;
+    top: 285px;
     transform: translateX(-50%);
     width: 143.67px;
     height: 40px;
@@ -223,6 +226,10 @@ button {
 }
 
 .overlay-panel h1 {
+    font-family: "Bebas Neue", sans-serif;
+  font-weight: 700;
+  font-size: 55px;
+  font-style: normal;
     color: #FFF;
 }
 
@@ -341,14 +348,19 @@ p {
         <div class="overlay-container" id="overlayCon">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <div class="Welcomeback"><p>Click here to Login</p></div>
+                    <h1>Raise-Hub</h1>
+                    <div class="Welcomeback"><p>Become a Fundraiser</p></div>
                     <button>Sign In</button>
+                    <br>
+                    <button style="top: 30px;"><a href="/foundationRequest" style="color: white;">Foundation Registration</a></button>
+                
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <div class="Hellofriend"><p>Click here to Signup</p></div>
+                    <h1>Raise-Hub</h1>
+                    <div class="Hellofriend"><p>Continue Funding Dreams</p></div>
                     <button>Sign Up</button>
+                    <br>
+                    <button style="top: 30px;"><a href="/foundationRequest" style="color: white;">Foundation Registration</a></button>
                 </div>
             </div>
             <button id="overlayBtn"></button>
