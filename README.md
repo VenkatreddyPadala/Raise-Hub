@@ -1,4 +1,4 @@
-# Rise Hub
+# Raise Hub
 
 You can view the Website here <a href = "https://raise-hub.onrender.com/"> Click Here</a>
 
